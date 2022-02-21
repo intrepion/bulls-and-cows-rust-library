@@ -23,6 +23,17 @@ mod count_cattle_should {
 
         assert_eq!(actual, expected);
     }
+
+    #[test]
+    fn return_0_bulls_and_1_cow_when_one_digit_correct_and_wrong_position() {
+        let secret_code = SecretCode::new("1234");
+        let guess = Guess::new("5671");
+
+        let actual = count_cattle(guess, secret_code);
+        let expected = Cattle::new(0, 1);
+
+        assert_eq!(actual, expected);
+    }
 }
 
 #[derive(Debug, PartialEq)]
