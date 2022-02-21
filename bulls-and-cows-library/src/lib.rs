@@ -7,7 +7,7 @@ mod count_cattle_should {
         let secret_code = "1234";
         let guess = "1234";
 
-        let actual = count_cattle(secret_code, guess);
+        let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(4, 0);
 
         assert_eq!(actual, expected);
@@ -18,7 +18,7 @@ mod count_cattle_should {
         let secret_code = "1234";
         let guess = "5678";
 
-        let actual = count_cattle(secret_code, guess);
+        let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(0, 0);
 
         assert_eq!(actual, expected);
@@ -40,7 +40,7 @@ impl Cattle {
     }
 }
 
-pub fn count_cattle(secret_code: &str, guess: &str) -> Cattle {
+pub fn count_cattle(guess: &str, secret_code: &str) -> Cattle {
     if guess == secret_code {
         return Cattle::new(4, 0)
     }
