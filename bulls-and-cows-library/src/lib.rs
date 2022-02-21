@@ -8,6 +8,7 @@ mod count_cattle_should {
         let guess = "1234";
 
         let _actual = count_cattle(secret_code, guess);
+        let _expected = CattleCount::new(4, 0);
     }
 }
 
