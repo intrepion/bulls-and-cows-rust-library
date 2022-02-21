@@ -165,7 +165,7 @@ mod count_cattle_should {
         ]);
 
         let actual = count_cattle(guess, secret);
-        let expected = Cattle::new(0, 4);
+        let expected = Cattle::new(1, 2);
 
         assert_eq!(actual, expected);
     }
@@ -228,7 +228,7 @@ impl Secret {
     }
 }
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Shape {
     Circle,
     Club,
@@ -245,13 +245,13 @@ pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
     let mut cows: u8 = 0;
 
     for (i, guess_shape) in guess.code.iter().enumerate() {
-        for (j, secret_shape) in secret.code.iter().enumerate() {
-            if i == j {
-                if *guess_shape == *secret_shape {
-                    bulls += 1;
+        if *guess_shape == secret.code[i] {
+            bulls += 1;
+        } else {
+            for (j, secret_shape) in secret.code.iter().enumerate() {
+                if i != j && *secret_shape == *guess_shape {
+                    cows += 1;
                 }
-            } else if *guess_shape == *secret_shape {
-                cows += 1;
             }
         }
     }
