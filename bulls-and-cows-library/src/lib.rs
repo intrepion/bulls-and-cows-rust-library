@@ -12,14 +12,31 @@ mod count_cattle_should {
 
         assert_eq!(actual, expected);
     }
+
+    #[test]
+    fn return_0_bulls_and_0_cows_when_completely_wrong() {
+        let secret_code = "1234";
+        let guess = "5678";
+
+        let actual = count_cattle(secret_code, guess);
+        let expected = Cattle::new(0, 0);
+
+        assert_eq!(actual, expected);
+    }
 }
 
 #[derive(Debug, PartialEq)]
-pub struct Cattle {}
+pub struct Cattle {
+    bulls: u8,
+    cows: u8,
+}
 
 impl Cattle {
-    pub fn new(_bulls: u8, _cows: u8) -> Cattle {
-        Cattle {}
+    pub fn new(bulls: u8, cows: u8) -> Cattle {
+        Cattle {
+            bulls,
+            cows,
+        }
     }
 }
 
