@@ -171,6 +171,10 @@ mod count_cattle_should {
     }
 }
 
+pub mod shape;
+
+use crate::shape::Shape;
+
 #[derive(Debug, PartialEq)]
 pub struct Bulls {
     count: u8,
@@ -226,18 +230,6 @@ impl Secret {
     pub fn new(code: Vec<Shape>) -> Secret {
         Secret { code }
     }
-}
-
-#[derive(Debug, PartialEq)]
-pub enum Shape {
-    Circle,
-    Club,
-    Diamond,
-    Heart,
-    Star,
-    Square,
-    Spade,
-    Triangle,
 }
 
 pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
