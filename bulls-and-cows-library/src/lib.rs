@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod count_cattle_should {
-    use crate::{count_cattle, Cattle, Guess, SecretCode};
+    use crate::{count_cattle, Cattle, Guess, SecretCode, Shape};
 
     #[test]
     fn return_4_bulls_and_0_cows_when_exactly_correct() {
-        let secret_code = SecretCode::new("1234");
-        let guess = Guess::new("1234");
+        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
+        let guess = Guess::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(4, 0);
@@ -15,8 +15,8 @@ mod count_cattle_should {
 
     #[test]
     fn return_0_bulls_and_0_cows_when_completely_wrong() {
-        let secret_code = SecretCode::new("1234");
-        let guess = Guess::new("5678");
+        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
+        let guess = Guess::new(vec![Shape::Club, Shape::Diamond, Shape::Heart, Shape::Spade]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(0, 0);
@@ -26,8 +26,8 @@ mod count_cattle_should {
 
     #[test]
     fn return_0_bulls_and_1_cow_when_one_digit_correct_and_wrong_position() {
-        let secret_code = SecretCode::new("1234");
-        let guess = Guess::new("5671");
+        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
+        let guess = Guess::new(vec![Shape::Club, Shape::Diamond, Shape::Heart, Shape::Circle]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(0, 1);
@@ -74,33 +74,56 @@ impl Cows {
 }
 
 pub struct Guess {
-    code: String,
+    code: Vec<Shape>,
 }
 
 impl Guess {
-    pub fn new(code: &str) -> Guess {
+    pub fn new(code: Vec<Shape>) -> Guess {
         Guess {
-            code: code.to_string(),
+            code,
         }
     }
 }
 
 pub struct SecretCode {
-    code: String,
+    code: Vec<Shape>,
 }
 
 impl SecretCode {
-    pub fn new(code: &str) -> SecretCode {
+    pub fn new(code: Vec<Shape>) -> SecretCode {
         SecretCode {
-            code: code.to_string(),
+            code,
         }
     }
 }
 
+#[derive(PartialEq)]
+pub enum Shape {
+    Circle,
+    Club,
+    Diamond,
+    Heart,
+    Star,
+    Square,
+    Spade,
+    Triangle,
+}
+
 pub fn count_cattle(guess: Guess, secret_code: SecretCode) -> Cattle {
-    if guess.code == secret_code.code {
-        return Cattle::new(4, 0);
+    let mut bulls: u8 = 0;
+    let mut cows: u8 = 0;
+
+    for (i, guess_shape) in guess.code.iter().enumerate() {
+        for (j, secret_shape) in secret_code.code.iter().enumerate() {
+            if i == j {
+                if *guess_shape == *secret_shape {
+                    bulls += 1;
+                }
+            } else if *guess_shape == *secret_shape {
+                cows += 1;
+            }
+        }
     }
 
-    Cattle::new(0, 0)
+    Cattle::new(bulls, cows)
 }
