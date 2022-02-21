@@ -9,7 +9,7 @@ impl Guess {
         Guess { code }
     }
 
-    pub fn get_code(&self) -> &Vec<Shape> {
-        &self.code
+    pub fn get_code(&self) -> Vec<Shape> {
+        self.code.clone()
     }
 }
