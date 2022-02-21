@@ -144,7 +144,7 @@ mod count_cattle_should {
         ]);
 
         let actual = count_cattle(guess, secret);
-        let expected = Cattle::new(0, 4);
+        let expected = Cattle::new(0, 3);
 
         assert_eq!(actual, expected);
     }
