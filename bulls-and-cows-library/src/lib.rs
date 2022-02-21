@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod count_cattle_should {
-    use crate::{count_cattle, CattleCount};
+    use crate::{count_cattle, Cattle};
 
     #[test]
     fn return_4_bulls_and_0_cows_when_exactly_correct() {
@@ -8,15 +8,15 @@ mod count_cattle_should {
         let guess = "1234";
 
         let _actual = count_cattle(secret_code, guess);
-        let _expected = CattleCount::new(4, 0);
+        let _expected = Cattle::new(4, 0);
     }
 }
 
-pub struct CattleCount {}
+pub struct Cattle {}
 
-impl CattleCount {
-    pub fn new(_bulls: u8, _cows: u8) -> CattleCount {
-        CattleCount {}
+impl Cattle {
+    pub fn new(_bulls: u8, _cows: u8) -> Cattle {
+        Cattle {}
     }
 }
 
