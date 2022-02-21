@@ -40,6 +40,10 @@ impl Cattle {
     }
 }
 
-pub fn count_cattle(_secret_code: &str, _guess: &str) -> Cattle {
-    Cattle::new(4, 0)
+pub fn count_cattle(secret_code: &str, guess: &str) -> Cattle {
+    if guess == secret_code {
+        return Cattle::new(4, 0)
+    }
+
+    Cattle::new(0, 0)
 }
