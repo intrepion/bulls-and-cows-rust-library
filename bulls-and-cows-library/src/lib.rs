@@ -244,13 +244,14 @@ pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
     let mut bulls: u8 = 0;
     let mut cows: u8 = 0;
 
-    for (i, guess_shape) in guess.code.iter().enumerate() {
+    'guessing: for (i, guess_shape) in guess.code.iter().enumerate() {
         if *guess_shape == secret.code[i] {
             bulls += 1;
         } else {
             for (j, secret_shape) in secret.code.iter().enumerate() {
                 if i != j && *secret_shape == *guess_shape {
                     cows += 1;
+                    continue 'guessing;
                 }
             }
         }
