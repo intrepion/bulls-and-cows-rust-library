@@ -1,11 +1,21 @@
 #[cfg(test)]
 mod count_cattle_should {
-    use crate::{count_cattle, Cattle, Guess, SecretCode, Shape};
+    use crate::{count_cattle, Cattle, Guess, Secret, Shape};
 
     #[test]
     fn return_4_bulls_and_0_cows_when_exactly_correct() {
-        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
-        let guess = Guess::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
+        let secret_code = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(4, 0);
@@ -15,8 +25,18 @@ mod count_cattle_should {
 
     #[test]
     fn return_0_bulls_and_0_cows_when_completely_wrong() {
-        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
-        let guess = Guess::new(vec![Shape::Club, Shape::Diamond, Shape::Heart, Shape::Spade]);
+        let secret_code = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Club,
+            Shape::Diamond,
+            Shape::Heart,
+            Shape::Spade,
+        ]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(0, 0);
@@ -26,8 +46,18 @@ mod count_cattle_should {
 
     #[test]
     fn return_0_bulls_and_1_cow_when_one_digit_correct_and_wrong_position() {
-        let secret_code = SecretCode::new(vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star]);
-        let guess = Guess::new(vec![Shape::Club, Shape::Diamond, Shape::Heart, Shape::Circle]);
+        let secret_code = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Club,
+            Shape::Diamond,
+            Shape::Heart,
+            Shape::Circle,
+        ]);
 
         let actual = count_cattle(guess, secret_code);
         let expected = Cattle::new(0, 1);
@@ -79,21 +109,17 @@ pub struct Guess {
 
 impl Guess {
     pub fn new(code: Vec<Shape>) -> Guess {
-        Guess {
-            code,
-        }
+        Guess { code }
     }
 }
 
-pub struct SecretCode {
+pub struct Secret {
     code: Vec<Shape>,
 }
 
-impl SecretCode {
-    pub fn new(code: Vec<Shape>) -> SecretCode {
-        SecretCode {
-            code,
-        }
+impl Secret {
+    pub fn new(code: Vec<Shape>) -> Secret {
+        Secret { code }
     }
 }
 
@@ -109,7 +135,7 @@ pub enum Shape {
     Triangle,
 }
 
-pub fn count_cattle(guess: Guess, secret_code: SecretCode) -> Cattle {
+pub fn count_cattle(guess: Guess, secret_code: Secret) -> Cattle {
     let mut bulls: u8 = 0;
     let mut cows: u8 = 0;
 
