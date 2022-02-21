@@ -7,8 +7,10 @@ mod count_cattle_should {
         let secret_code = "1234";
         let guess = "1234";
 
-        let _actual = count_cattle(secret_code, guess);
-        let _expected = Cattle::new(4, 0);
+        let actual = count_cattle(secret_code, guess);
+        let expected = Cattle::new(4, 0);
+
+        assert_eq!(actual, expected);
     }
 }
 
