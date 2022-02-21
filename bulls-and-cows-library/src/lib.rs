@@ -3,8 +3,8 @@ mod count_cattle_should {
     use crate::{count_cattle, Cattle, Guess, Secret, Shape};
 
     #[test]
-    fn return_4_bulls_and_0_cows_when_exactly_correct() {
-        let secret_code = Secret::new(vec![
+    fn return_4_bull_and_0_cow_when_4_correct() {
+        let secret = Secret::new(vec![
             Shape::Circle,
             Shape::Triangle,
             Shape::Square,
@@ -17,15 +17,15 @@ mod count_cattle_should {
             Shape::Star,
         ]);
 
-        let actual = count_cattle(guess, secret_code);
+        let actual = count_cattle(guess, secret);
         let expected = Cattle::new(4, 0);
 
         assert_eq!(actual, expected);
     }
 
     #[test]
-    fn return_0_bulls_and_0_cows_when_completely_wrong() {
-        let secret_code = Secret::new(vec![
+    fn return_0_bull_and_0_cow_when_completely_wrong() {
+        let secret = Secret::new(vec![
             Shape::Circle,
             Shape::Triangle,
             Shape::Square,
@@ -38,15 +38,15 @@ mod count_cattle_should {
             Shape::Spade,
         ]);
 
-        let actual = count_cattle(guess, secret_code);
+        let actual = count_cattle(guess, secret);
         let expected = Cattle::new(0, 0);
 
         assert_eq!(actual, expected);
     }
 
     #[test]
-    fn return_0_bulls_and_1_cow_when_one_digit_correct_and_wrong_position() {
-        let secret_code = Secret::new(vec![
+    fn return_0_bull_and_1_cow_when_1_wrong_position() {
+        let secret = Secret::new(vec![
             Shape::Circle,
             Shape::Triangle,
             Shape::Square,
@@ -59,8 +59,113 @@ mod count_cattle_should {
             Shape::Circle,
         ]);
 
-        let actual = count_cattle(guess, secret_code);
+        let actual = count_cattle(guess, secret);
         let expected = Cattle::new(0, 1);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn return_1_bull_and_0_cow_when_1_correct() {
+        let secret = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Circle,
+            Shape::Diamond,
+            Shape::Heart,
+            Shape::Spade,
+        ]);
+
+        let actual = count_cattle(guess, secret);
+        let expected = Cattle::new(1, 0);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn return_1_bull_and_3_cow_when_4_correct_and_3_wrong_position() {
+        let secret = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Circle,
+            Shape::Circle,
+            Shape::Circle,
+            Shape::Circle,
+        ]);
+
+        let actual = count_cattle(guess, secret);
+        let expected = Cattle::new(1, 3);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn return_0_bull_and_4_cow_when_4_correct_and_4_wrong_position() {
+        let secret = Secret::new(vec![
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Star,
+            Shape::Square,
+            Shape::Triangle,
+            Shape::Circle,
+        ]);
+
+        let actual = count_cattle(guess, secret);
+        let expected = Cattle::new(0, 4);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn return_0_bull_and_3_cow_when_3_correct_and_3_wrong_position() {
+        let secret = Secret::new(vec![
+            Shape::Circle,
+            Shape::Circle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Star,
+            Shape::Square,
+            Shape::Triangle,
+            Shape::Circle,
+        ]);
+
+        let actual = count_cattle(guess, secret);
+        let expected = Cattle::new(0, 4);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn return_1_bull_and_2_cow_when_3_correct_and_2_wrong_position() {
+        let secret = Secret::new(vec![
+            Shape::Circle,
+            Shape::Circle,
+            Shape::Square,
+            Shape::Star,
+        ]);
+        let guess = Guess::new(vec![
+            Shape::Star,
+            Shape::Circle,
+            Shape::Triangle,
+            Shape::Square,
+        ]);
+
+        let actual = count_cattle(guess, secret);
+        let expected = Cattle::new(0, 4);
 
         assert_eq!(actual, expected);
     }
@@ -135,12 +240,12 @@ pub enum Shape {
     Triangle,
 }
 
-pub fn count_cattle(guess: Guess, secret_code: Secret) -> Cattle {
+pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
     let mut bulls: u8 = 0;
     let mut cows: u8 = 0;
 
     for (i, guess_shape) in guess.code.iter().enumerate() {
-        for (j, secret_shape) in secret_code.code.iter().enumerate() {
+        for (j, secret_shape) in secret.code.iter().enumerate() {
             if i == j {
                 if *guess_shape == *secret_shape {
                     bulls += 1;
