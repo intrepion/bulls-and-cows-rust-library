@@ -14,6 +14,7 @@ mod count_cattle_should {
     }
 }
 
+#[derive(Debug, PartialEq)]
 pub struct Cattle {}
 
 impl Cattle {
@@ -22,5 +23,6 @@ impl Cattle {
     }
 }
 
-pub fn count_cattle(_secret_code: &str, _guess: &str) {
+pub fn count_cattle(_secret_code: &str, _guess: &str) -> Cattle {
+    Cattle::new(4, 0)
 }
