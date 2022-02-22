@@ -15,7 +15,7 @@ mod secret_test {
         }
 
         #[test]
-        fn be_independent_to_any_changes_in_secret() {
+        fn be_independent_to_any_changes() {
             let secret = Secret::new(vec![
                 Shape::Circle,
                 Shape::Triangle,
@@ -24,6 +24,13 @@ mod secret_test {
             ]);
 
             let actual = secret.get_code();
+            let mut _changed_secret = secret;
+            _changed_secret = Secret::new(vec![
+                Shape::Club,
+                Shape::Diamond,
+                Shape::Heart,
+                Shape::Spade,
+            ]);
             let expected = vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star];
 
             assert_eq!(actual, expected);
@@ -33,6 +40,7 @@ mod secret_test {
 
 use crate::shape::Shape;
 
+#[derive(PartialEq)]
 pub struct Secret {
     code: Vec<Shape>,
 }
