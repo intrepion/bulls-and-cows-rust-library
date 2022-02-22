@@ -1,10 +1,12 @@
 #[cfg(test)]
-mod new_game_should {
+mod game_should {
     use super::Game;
 
     #[test]
-    fn have_initial_state_of_the_game() {
+    fn have_initial_state_when_creating_new() {
         let game = Game::new();
+
+        let actual = game.get_move_history();
     }
 }
 
