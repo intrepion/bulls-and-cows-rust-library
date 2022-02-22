@@ -1,7 +1,7 @@
 use crate::counters::bull::Bulls;
 use crate::counters::cow::Cows;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Cattle {
     bulls: Bulls,
     cows: Cows,

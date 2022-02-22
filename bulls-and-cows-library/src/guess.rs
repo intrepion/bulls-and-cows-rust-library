@@ -1,6 +1,12 @@
+#[cfg(test)]
+mod guess_test {
+    mod get_code_should {
+    }
+}
+
 use crate::shape::Shape;
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Guess {
     code: Vec<Shape>,
 }

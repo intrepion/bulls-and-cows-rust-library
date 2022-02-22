@@ -21,7 +21,7 @@ mod count_cattle_should {
             Shape::Star,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(4, 0);
 
         assert_eq!(actual, expected);
@@ -42,7 +42,7 @@ mod count_cattle_should {
             Shape::Spade,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(0, 0);
 
         assert_eq!(actual, expected);
@@ -63,7 +63,7 @@ mod count_cattle_should {
             Shape::Circle,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(0, 1);
 
         assert_eq!(actual, expected);
@@ -84,7 +84,7 @@ mod count_cattle_should {
             Shape::Spade,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(1, 0);
 
         assert_eq!(actual, expected);
@@ -105,7 +105,7 @@ mod count_cattle_should {
             Shape::Circle,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(1, 3);
 
         assert_eq!(actual, expected);
@@ -126,7 +126,7 @@ mod count_cattle_should {
             Shape::Circle,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(0, 4);
 
         assert_eq!(actual, expected);
@@ -147,7 +147,7 @@ mod count_cattle_should {
             Shape::Circle,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(0, 3);
 
         assert_eq!(actual, expected);
@@ -168,7 +168,7 @@ mod count_cattle_should {
             Shape::Square,
         ]);
 
-        let actual = count_cattle(guess, secret);
+        let actual = count_cattle(guess, &secret);
         let expected = Cattle::new(1, 2);
 
         assert_eq!(actual, expected);
@@ -179,7 +179,7 @@ use crate::counters::cattle::Cattle;
 use crate::guess::Guess;
 use crate::secret::Secret;
 
-pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
+pub fn count_cattle(guess: Guess, secret: &Secret) -> Cattle {
     let mut bulls: u8 = 0;
     let mut cows: u8 = 0;
 
