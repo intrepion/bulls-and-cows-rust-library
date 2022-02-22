@@ -1,4 +1,4 @@
-use crate::game::shape::Shape;
+use crate::logic::shape::Shape;
 
 pub struct Guess {
     code: Vec<Shape>,
