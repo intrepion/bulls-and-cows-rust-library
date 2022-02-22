@@ -13,6 +13,8 @@ mod game_should {
     }
 }
 
+use crate::counters::cattle::Cattle;
+use crate::guess::Guess;
 pub struct Game {}
 
 impl Game {
@@ -20,7 +22,9 @@ impl Game {
         Game {}
     }
 
-    pub fn get_move_history(&self) {}
+    pub fn get_move_history(&self) -> Vec<(Guess, Cattle)> {
+        vec![]
+    }
 }
 
 impl Default for Game {

@@ -1,5 +1,6 @@
 use crate::shape::Shape;
 
+#[derive(Debug, PartialEq)]
 pub struct Guess {
     code: Vec<Shape>,
 }
