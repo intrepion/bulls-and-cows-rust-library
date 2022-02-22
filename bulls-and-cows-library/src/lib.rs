@@ -1,2 +1,5 @@
 pub mod counters;
-pub mod logic;
+pub mod game;
+pub mod guess;
+pub mod secret;
+pub mod shape;
