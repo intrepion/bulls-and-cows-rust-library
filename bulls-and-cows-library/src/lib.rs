@@ -1,2 +1,2 @@
 pub mod counters;
-pub mod logic;
+pub mod game;

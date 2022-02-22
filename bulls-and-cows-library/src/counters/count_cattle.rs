@@ -2,9 +2,9 @@
 mod count_cattle_should {
     use crate::counters::cattle::Cattle;
     use crate::counters::count_cattle::count_cattle;
-    use crate::logic::guess::Guess;
-    use crate::logic::secret::Secret;
-    use crate::logic::shape::Shape;
+    use crate::game::guess::Guess;
+    use crate::game::secret::Secret;
+    use crate::game::shape::Shape;
 
     #[test]
     fn return_4_bull_and_0_cow_when_4_correct() {
@@ -176,8 +176,8 @@ mod count_cattle_should {
 }
 
 use crate::counters::cattle::Cattle;
-use crate::logic::guess::Guess;
-use crate::logic::secret::Secret;
+use crate::game::guess::Guess;
+use crate::game::secret::Secret;
 
 pub fn count_cattle(guess: Guess, secret: Secret) -> Cattle {
     let mut bulls: u8 = 0;

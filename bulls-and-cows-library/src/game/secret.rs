@@ -1,4 +1,4 @@
-use crate::logic::shape::Shape;
+use crate::game::shape::Shape;
 
 pub struct Secret {
     code: Vec<Shape>,
