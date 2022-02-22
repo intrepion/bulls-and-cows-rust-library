@@ -6,7 +6,10 @@ mod game_should {
     fn have_initial_state_when_creating_new() {
         let game = Game::new();
 
-        let _actual = game.get_move_history();
+        let actual = game.get_move_history();
+        let expected = vec![];
+
+        assert_eq!(actual, expected);
     }
 }
 
