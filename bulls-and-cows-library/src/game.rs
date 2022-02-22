@@ -10,7 +10,10 @@ mod game_test {
 
         #[test]
         fn be_empty_when_creating_new() {
-            let game = Game::default();
+            let mut game = Game::default();
+            for _ in 0..1000 {
+                game = Game::default();
+            }
 
             let actual = game.get_guess_history();
             let expected = vec![];
@@ -52,6 +55,7 @@ use crate::counters::cattle::Cattle;
 use crate::counters::count_cattle::count_cattle;
 use crate::guess::Guess;
 use crate::secret::Secret;
+use rand;
 
 pub struct Game {
     guess_history: Vec<(Guess, Cattle)>,
@@ -69,7 +73,13 @@ impl Game {
     }
 
     pub fn new() -> Game {
-        Game::new_with_secret(Secret::new(vec![]))
+        let secret = Secret::new(vec![
+            rand::random(),
+            rand::random(),
+            rand::random(),
+            rand::random(),
+        ]);
+        Game::new_with_secret(secret)
     }
 
     pub fn new_with_secret(secret: Secret) -> Game {
