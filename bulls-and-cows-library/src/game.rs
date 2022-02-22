@@ -2,9 +2,9 @@
 mod game_test {
     mod get_guess_history_should {
         use crate::counters::cattle::Cattle;
+        use crate::guess::Guess;
         use crate::secret::Secret;
         use crate::shape::Shape;
-        use crate::guess::Guess;
 
         use super::super::Game;
 
@@ -39,12 +39,15 @@ mod game_test {
             game.add_guess(guess);
 
             let actual = game.get_guess_history();
-            let expected = vec![(Guess::new(vec![
-                Shape::Circle,
-                Shape::Triangle,
-                Shape::Square,
-                Shape::Star,
-            ]), Cattle::new(4, 0))];
+            let expected = vec![(
+                Guess::new(vec![
+                    Shape::Circle,
+                    Shape::Triangle,
+                    Shape::Square,
+                    Shape::Star,
+                ]),
+                Cattle::new(4, 0),
+            )];
 
             assert_eq!(actual, expected);
         }
@@ -85,7 +88,7 @@ impl Game {
     pub fn new_with_secret(secret: Secret) -> Game {
         Game {
             guess_history: vec![],
-            secret
+            secret,
         }
     }
 }

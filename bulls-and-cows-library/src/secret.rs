@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod secret_test {
     mod get_code_should {
-        use crate::shape::Shape;
         use super::super::Secret;
+        use crate::shape::Shape;
 
         #[test]
         fn be_empty_when_creating_new() {
@@ -24,12 +24,7 @@ mod secret_test {
             ]);
 
             let actual = secret.get_code();
-            let expected = vec![
-                Shape::Circle,
-                Shape::Triangle,
-                Shape::Square,
-                Shape::Star,
-            ];
+            let expected = vec![Shape::Circle, Shape::Triangle, Shape::Square, Shape::Star];
 
             assert_eq!(actual, expected);
         }

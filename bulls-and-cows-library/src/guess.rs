@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod guess_test {
-    mod get_code_should {
-    }
+    mod get_code_should {}
 }
 
 use crate::shape::Shape;
