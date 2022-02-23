@@ -75,6 +75,7 @@ use crate::secret::Secret;
 use rand;
 
 pub struct Game {
+    game_over: bool,
     guess_history: Vec<(Guess, Cattle)>,
     secret: Secret,
 }
@@ -83,6 +84,10 @@ impl Game {
     pub fn add_guess(&mut self, guess: Guess) {
         let cattle = count_cattle(guess.clone(), &self.secret);
         self.guess_history.push((guess, cattle));
+    }
+
+    pub fn get_game_over(&self) -> bool {
+        self.game_over.clone()
     }
 
     pub fn get_guess_history(&self) -> Vec<(Guess, Cattle)> {
@@ -101,6 +106,7 @@ impl Game {
 
     pub fn new_with_secret(secret: Secret) -> Game {
         Game {
+            game_over: false,
             guess_history: vec![],
             secret,
         }
