@@ -1,10 +1,10 @@
 #[cfg(test)]
 mod game_test {
     mod get_game_over_should {
+        use super::super::Game;
         use crate::guess::Guess;
         use crate::secret::Secret;
         use crate::shape::Shape;
-        use super::super::Game;
 
         #[test]
         fn return_false_when_game_is_not_over() {
@@ -38,14 +38,37 @@ mod game_test {
 
             assert_eq!(actual, expected);
         }
+
+        #[test]
+        fn return_false_when_guesses_do_not_match() {
+            let secret = Secret::new(vec![
+                Shape::Circle,
+                Shape::Triangle,
+                Shape::Square,
+                Shape::Star,
+            ]);
+            let mut game = Game::new_with_secret(secret);
+            let guess = Guess::new(vec![
+                Shape::Heart,
+                Shape::Triangle,
+                Shape::Square,
+                Shape::Star,
+            ]);
+            game.add_guess(guess);
+
+            let actual = game.get_game_over();
+            let expected = false;
+
+            assert_eq!(actual, expected);
+        }
     }
 
     mod get_guess_history_should {
+        use super::super::Game;
         use crate::counters::cattle::Cattle;
         use crate::guess::Guess;
         use crate::secret::Secret;
         use crate::shape::Shape;
-        use super::super::Game;
 
         #[test]
         fn be_empty_when_creating_new() {
