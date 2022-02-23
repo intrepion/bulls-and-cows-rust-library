@@ -115,6 +115,52 @@ mod game_test {
         }
 
         #[test]
+        fn have_two_movem_in_history() {
+            let secret = Secret::new(vec![
+                Shape::Circle,
+                Shape::Triangle,
+                Shape::Square,
+                Shape::Star,
+            ]);
+            let mut game = Game::new_with_secret(secret);
+            let guess = Guess::new(vec![
+                Shape::Club,
+                Shape::Diamond,
+                Shape::Heart,
+                Shape::Spade,
+            ]);
+            game.add_guess(guess);
+            let guess = Guess::new(vec![
+                Shape::Circle,
+                Shape::Triangle,
+                Shape::Square,
+                Shape::Star,
+            ]);
+            game.add_guess(guess);
+
+            let actual = game.get_guess_history();
+            let expected = vec![(
+                Guess::new(vec![
+                    Shape::Club,
+                    Shape::Diamond,
+                    Shape::Heart,
+                    Shape::Spade,
+                    ]),
+                Cattle::new(0, 0),
+            ),(
+                Guess::new(vec![
+                    Shape::Circle,
+                    Shape::Triangle,
+                    Shape::Square,
+                    Shape::Star,
+                ]),
+                Cattle::new(4, 0),
+            )];
+
+            assert_eq!(actual, expected);                
+        }
+
+        #[test]
         fn not_include_any_guesses_after_game_over() {
             let secret = Secret::new(vec![
                 Shape::Circle,
