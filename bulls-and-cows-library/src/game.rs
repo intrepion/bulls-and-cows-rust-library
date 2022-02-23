@@ -168,6 +168,10 @@ pub struct Game {
 
 impl Game {
     pub fn add_guess(&mut self, guess: Guess) {
+        if self.game_over {
+            return;
+        }
+
         let cattle = count_cattle(guess.clone(), &self.secret);
         self.game_over = guess.get_code() == self.secret.get_code();
         self.guess_history.push((guess, cattle));
