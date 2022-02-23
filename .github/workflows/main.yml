@@ -16,18 +16,18 @@ jobs:
     - uses: actions/checkout@v2
     - name: Format
       run: cd bulls-and-cows-library && cargo fmt -- --check
-  check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Check
-      run: cd bulls-and-cows-library && cargo check
   lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Lint
       run: cd bulls-and-cows-library && cargo clippy -- -D warnings
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check
+      run: cd bulls-and-cows-library && cargo check
   test:
     runs-on: ubuntu-latest
     steps:
@@ -40,21 +40,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Audit
       run: cd bulls-and-cows-library && cargo audit
-  unused:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install latest nightly
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: nightly
-    - name: "Udeps Installation"
-      uses: actions-rs/cargo@v1
-      with:
-        command: install
-        args: cargo-udeps --locked
-    - uses: actions/checkout@v2
-    - name: Unused
-      run: cd bulls-and-cows-library && cargo +nightly udeps
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -83,3 +68,18 @@ jobs:
         with:
           name: code-coverage-report
           path: cobertura.xml
+  unused:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install latest nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+    - name: "Udeps Installation"
+      uses: actions-rs/cargo@v1
+      with:
+        command: install
+        args: cargo-udeps --locked
+    - uses: actions/checkout@v2
+    - name: Unused
+      run: cd bulls-and-cows-library && cargo +nightly udeps
