@@ -115,7 +115,7 @@ mod game_test {
         }
 
         #[test]
-        fn have_two_movem_in_history() {
+        fn have_two_moves_in_history() {
             let secret = Secret::new(vec![
                 Shape::Circle,
                 Shape::Triangle,
