@@ -139,25 +139,28 @@ mod game_test {
             game.add_guess(guess);
 
             let actual = game.get_guess_history();
-            let expected = vec![(
-                Guess::new(vec![
-                    Shape::Club,
-                    Shape::Diamond,
-                    Shape::Heart,
-                    Shape::Spade,
+            let expected = vec![
+                (
+                    Guess::new(vec![
+                        Shape::Club,
+                        Shape::Diamond,
+                        Shape::Heart,
+                        Shape::Spade,
                     ]),
-                Cattle::new(0, 0),
-            ),(
-                Guess::new(vec![
-                    Shape::Circle,
-                    Shape::Triangle,
-                    Shape::Square,
-                    Shape::Star,
-                ]),
-                Cattle::new(4, 0),
-            )];
+                    Cattle::new(0, 0),
+                ),
+                (
+                    Guess::new(vec![
+                        Shape::Circle,
+                        Shape::Triangle,
+                        Shape::Square,
+                        Shape::Star,
+                    ]),
+                    Cattle::new(4, 0),
+                ),
+            ];
 
-            assert_eq!(actual, expected);                
+            assert_eq!(actual, expected);
         }
 
         #[test]
@@ -195,7 +198,7 @@ mod game_test {
                 Cattle::new(4, 0),
             )];
 
-            assert_eq!(actual, expected);                
+            assert_eq!(actual, expected);
         }
     }
 }
