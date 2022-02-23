@@ -1,5 +1,19 @@
 #[cfg(test)]
 mod game_test {
+    mod get_game_over_should {
+        use super::super::Game;
+
+        #[test]
+        fn return_false_when_game_is_not_over() {
+            let game = Game::default();
+
+            let actual = game.get_game_over();
+            let expected = false;
+
+            assert_eq!(actual, expected);
+        }
+    }
+
     mod get_guess_history_should {
         use crate::counters::cattle::Cattle;
         use crate::guess::Guess;
