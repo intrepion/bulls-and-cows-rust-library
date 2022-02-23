@@ -109,6 +109,7 @@ impl Game {
     pub fn add_guess(&mut self, guess: Guess) {
         let cattle = count_cattle(guess.clone(), &self.secret);
         self.guess_history.push((guess, cattle));
+        self.game_over = true;
     }
 
     pub fn get_game_over(&self) -> bool {
