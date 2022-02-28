@@ -227,7 +227,7 @@ impl Game {
     }
 
     pub fn get_game_over(&self) -> bool {
-        self.game_over.clone()
+        self.game_over
     }
 
     pub fn get_guess_history(&self) -> Vec<(Guess, Cattle)> {
